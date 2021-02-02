@@ -3,6 +3,8 @@ CREATE USER station_meteo@localhost;
 GRANT ALL PRIVILEGES ON station_meteo.* TO station_meteo@localhost;
 FLUSH PRIVILEGES;
 
+//ATTENTION A EXECUTER LES SCRIPTS SEPAREMENT
+
 CREATE TABLE emplacements(
    id_emplacement INT NOT NULL AUTO_INCREMENT,
    nom_emplacement VARCHAR(50) DEFAULT '',
