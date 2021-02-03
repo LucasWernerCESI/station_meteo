@@ -15,7 +15,6 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $item->id_releve_meteo = $data->id_releve_meteo;
     $item->date_heure = $data->date_heure;
     $item->temperature = $data->temperature;
     $item->humidite = $data->humidite;
