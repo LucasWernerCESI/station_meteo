@@ -6,9 +6,9 @@ class Data {
     private $connection; 
 
     // Tables 
-    const db_table_data = "donnees_meteo";
-    const db_table_sensors = "sondes";
-    const db_table_places = "emplacements";
+    const DB_TABLE_DATA = "donnees_meteo";
+    const DB_TABLE_SENSORS = "sondes";
+    const DB_TABLE_PLACES = "emplacements";
 
     // Columns 
     public $nom_emplacement; 
@@ -24,15 +24,20 @@ class Data {
     } 
 
 
-    // GET data w/ param 
-    public static function getData($db)
+    /**
+     * GET data w/ param 
+     * @param object $db (PDO)
+     * @param array $timePeriod (start date_time, end date_time)
+     * @return object $stmt (SQL statement)
+     */
+    public static function getData($db, $timePeriod = [])
     {
         $sqlQuery = "
-        SELECT " . self::db_table_sensors . ".id_sonde, nom_emplacement, date_heure, temperature, humidite FROM " . self::db_table_data . " 
-            JOIN " . self::db_table_sensors . " 
-                ON " . self::db_table_data . ".id_sonde = " . self::db_table_sensors . ".id_sonde
-            JOIN " . self::db_table_places . "
-                ON " . self::db_table_sensors . ".id_emplacement = " . self::db_table_places . ".id_emplacement";
+        SELECT " . self::DB_TABLE_SENSORS . ".id_sonde, nom_emplacement, date_heure, temperature, humidite FROM " . self::DB_TABLE_DATA . " 
+            JOIN " . self::DB_TABLE_SENSORS . " 
+                ON " . self::DB_TABLE_DATA . ".id_sonde = " . self::DB_TABLE_SENSORS . ".id_sonde
+            JOIN " . self::DB_TABLE_PLACES . "
+                ON " . self::DB_TABLE_SENSORS . ".id_emplacement = " . self::DB_TABLE_PLACES . ".id_emplacement";
 
         $stmt = $db->prepare($sqlQuery);
         
@@ -73,7 +78,7 @@ class Data {
     // READ sensor's last data 
     public static function getLastData($db, $id_sonde)
     { 
-        $sqlQuery = "SELECT date_heure, temperature, humidite, id_sonde FROM ". self::db_table_data ." WHERE id_sonde = :id_sonde ORDER BY date_heure DESC LIMIT 0,1"; 
+        $sqlQuery = "SELECT date_heure, temperature, humidite, id_sonde FROM ". self::DB_TABLE_DATA ." WHERE id_sonde = :id_sonde ORDER BY date_heure DESC LIMIT 0,1"; 
         $stmt = $db->prepare($sqlQuery); 
         $stmt->bindParam(":id_sonde", $id_sonde);
         $stmt->execute();

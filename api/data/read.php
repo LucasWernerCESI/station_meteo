@@ -16,7 +16,7 @@
         
         $dataArr = array();
         $dataArr["body"] = array();
-        $dataArr["itemCount"] = $dataCount;
+        $dataArr["dataCount"] = $dataCount;
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
