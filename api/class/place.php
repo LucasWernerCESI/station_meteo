@@ -8,7 +8,7 @@
         private $db_table = "emplacements";
 
         // Columns
-        public $nom_emplacement;
+        public $place_name;
 
         // Db connection
         public function __construct($db){
@@ -33,10 +33,10 @@
             $stmt = $this->connection->prepare($sqlQuery);
         
             // sanitize
-            $this->nom_emplacement=htmlspecialchars(strip_tags($this->nom_emplacement));
+            $this->place_name = htmlspecialchars(strip_tags($this->place_name));
         
             // bind data
-            $stmt->bindParam(":nom_emplacement", $this->nom_emplacement);
+            $stmt->bindParam(":nom_emplacement", $this->place_name);
         
             if($stmt->execute()){
                return true;
@@ -49,9 +49,9 @@
             $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE nom_emplacement = :nom_emplacement";
             $stmt = $this->connection->prepare($sqlQuery);
         
-            $this->nom_emplacement = htmlspecialchars(strip_tags($this->nom_emplacement));
+            $this->place_name = htmlspecialchars(strip_tags($this->place_name));
         
-            $stmt->bindParam(":nom_emplacement", $this->nom_emplacement);
+            $stmt->bindParam(":nom_emplacement", $this->place_name);
         
             if($stmt->execute()){
                 return true;
