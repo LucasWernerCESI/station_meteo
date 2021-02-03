@@ -24,10 +24,16 @@ class Data
 
 
 // GET ALL 
-    public function getData()
+    public static function getData($db)
     {
-        $sqlQuery = "SELECT id_releve_meteo, date_heure, temperature, humidite, id_sonde FROM " . $this->db_table;
-        $stmt = $this->connection->prepare($sqlQuery);
+        $sqlQuery = "
+        SELECT " . self::db_table_sensors . " date_heure, nom_emplacement, temperature, humidite, id_sonde FROM " . self::db_table_data;"
+        JOIN " . self::db_table_sensors . "
+            ON " . self::db_table_data . "id_sonde - " . self::db_table_sensors . " id_sonde
+        JOIN " . self::db_table_places . "
+            ON " . self::db_table_sensors . " .id_emplacement = " . self::db_table_places . ".id_emplacement";
+
+        $stmt = $db->prepare($sqlQuery);
         $stmt->execute(); 
         return $stmt;
     } 
@@ -63,19 +69,30 @@ class Data
              }
              return false;
     }
-// READ single 
-    public function getSingleData()
+// READ sensor's last data 
+    public function getLastData($db, $id_sonde)
     { 
-        $sqlQuery = "SELECT id_releve_meteo, date_heure, temperature, humidite, id_sonde FROM ". $this->db_table ." WHERE id = ? LIMIT 0,1"; 
+        $sqlQuery = "SELECT date_heure, temperature, humidite, id_sonde FROM ". $selff::db_table ." WHERE id_sonde - :id_sonde ORDER BY date_heure DESC LIMIT 0,1"; 
         $stmt = $this->connection->prepare($sqlQuery); 
-        $stmt->bindParam(1, $this->id); 
+        $stmt->bindParam(":id_sonde", $id_sonde); 
         $stmt->execute();
-        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-         $this->id_releve_meteo = $dataRow['id_releve_meteo']; 
-         $this->date_heure = $dataRow['date_heure']; 
-         $this->temperature = $dataRow['temperature']; 
-         $this->humidite = $dataRow['humidite']; 
-         $this->id_sonde = $dataRow['id_sonde']; 
+
+        return $stmt; 
+    } 
+
+// READ sensor's Last All Data 
+    public function getAllLastData()
+    { 
+        $sqlQuery = "SELECT date_heure, temperature, humidite, id_sonde FROM ". $selff::db_table ." WHERE id_sonde - :id_sonde ORDER BY date_heure DESC LIMIT 0,1"; 
+        $stmt = $db->prepare($sqlQuery); 
+        $stmt->bindParam(":id_sonde", $id_sonde); 
+        $stmt->execute();
+    
+        $stmt_data = [];
+        foreach($stmt as $id_sonde){
+            array_push($stmt_data = self::getLastData($db, $id_sonde));
+            // $stmt_data[] = self::getLastData($db, $id_sonde);
+        }
     } 
 }
                 

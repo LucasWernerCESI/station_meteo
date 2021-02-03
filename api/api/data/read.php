@@ -3,38 +3,37 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     include_once '../config/database.php';
-    include_once '../class/Data.php';
+    include_once '../class/data.php';
 
-    $database = new Database();
-    $db = $database->getConnection();
+    $db = Database::getConnection();
 
-    $items = new Data($db);
-
-    $stmt = $items->getData();
-    $itemCount = $stmt->rowCount();
+    $stmt = Data::getData();
+    $dataCount = $stmt->rowCount();
 
 
-    echo json_encode($itemCount);
+    echo json_encode($dataCount);
 
-    if($itemCount > 0){
+    if($dataCount > 0){
         
-        $DataArr = array();
-        $DataArr["body"] = array();
-        $DataArr["itemCount"] = $itemCount;
+        $dataArr = array();
+        $dataArr["body"] = array();
+        $dataArr["dataCount"] = $dataCount;
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
-                "id_releve_meteo" => $id_releve_meteo,
+                "id_sonde" => $id_sonde,
+                "nom_emplacement" => $nom_emplacement,
                 "date_heure" => $date_heure,
                 "temperature" => $temperature,
-                "humidite" => $humidite,
-                "id_sonde" => $id_sonde
+                "humidite" => $humidite
+                
             );
 
-            array_push($DataArr["body"], $e);
+            array_push($dataArr["body"], $e);
         }
-        echo json_encode($DataArr);
+        http_response_code(200);
+        echo json_encode($dataArr);
     }
 
     else{
