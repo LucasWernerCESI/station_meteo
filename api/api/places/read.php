@@ -30,7 +30,7 @@
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
-                "nom_emplacement" => $id
+                "nom_emplacement" => $nom_emplacement
             );
 
             array_push($placesArr["body"], $e);
