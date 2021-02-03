@@ -2,8 +2,8 @@
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
     
-    include_once '../api/config/database.php';
-    include_once '../api/class/data.php';
+    include_once '../config/database.php';
+    include_once '../class/data.php';
 
     $db = Database::getConnection();
 
