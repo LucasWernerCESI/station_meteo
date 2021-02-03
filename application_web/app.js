@@ -10,13 +10,17 @@ const meteo = await fetch("API/CHEMIN")
 
 function displayWeatherInfos (data){
 
-    const time = data.StatusSNS.Time;                            
-    const temperature = data.StatusSNS.HTU21.Temperature;
-    const humidity = data.StatusSNS.HTU21.Humidity;
+    const id_sonde = data.body[0].id_sonde;
+    const date_heure = data.body[0].date_heure;                            
+    const temperature = data.body[0].Temperature;
+    const humidite = data.body[0].Humidity;
+    const emplacement = data.body[0].nom_emplacement;
 
-    document.querySelector('#Time').textContent = Time;
-    document.querySelector('#Temperature').textContent = Math.round(temperature);
-    document.querySelector('#Humidity').textContent = humidity;
+    document.querySelector('#emplacement').textContent = emplacement;
+    document.querySelector('#sonde').textContent = id_sonde;
+    document.querySelector('#time').textContent = date_heure;
+    document.querySelector('#temperature').textContent = Math.round(temperature);
+    document.querySelector('#humidite').textContent = humidite;
 
 }
 main();
