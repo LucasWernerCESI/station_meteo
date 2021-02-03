@@ -11,6 +11,7 @@
         // Columns
         public $id_sonde;
         public $id_emplacement;
+        public $nom_emplacement;
 
         // Db connection
         public function __construct($db){
