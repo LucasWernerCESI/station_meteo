@@ -25,7 +25,6 @@
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
-                "id" => $id,
                 "id_releve_meteo" => $id_releve_meteo,
                 "date_heure" => $date_heure,
                 "temperature" => $temperature,
