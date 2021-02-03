@@ -1,56 +1,44 @@
 <?php
     class Sensor{
+        private $conn;
 
-        // Connection
-        private $connection;
+        private $db_table = "sonde";
+        private $db_table_join = "emplacement"
 
-        // Tables
-        private $db_table = "sondes";
-        private $db_table_join = "emplacements";
-
-        // Columns
-        public $id_sonde;
-        public $id_emplacement;
-
-        // Db connection
-        public function __construct($db){
-            $this->connection = $db;
+        public $id_sonde
+        public $id_emplacement
+        public $nom_emplacement
+        
+        public_function __construct($db){
+            $this->conn = $db;
         }
-
-        // GET ALL
-        public function getSensors(){
+        //GET ALL
+        public function getSensor(){
             $sqlQuery = "SELECT id_sonde, nom_emplacement FROM " . $this->db_table . " JOIN " . $this->db_table_join;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
-            return $stmt;
+            return $stmt; 
         }
-
-        // CREATE
-        public function createSensor(){
-            $sqlQuery = "INSERT INTO
+        //CREATE
+        public fonction createSensor(){
+        $sqlQuery = "INSERT INTO
                         ". $this->db_table ."
                     SET
-                        name = :name, 
-                        email = :email, 
-                        age = :age, 
-                        designation = :designation, 
-                        created = :created";
+                        id_sonde = :id_sonde, 
+                        id_emplacement = :id_emplacement" 
+                        
         
             $stmt = $this->connection->prepare($sqlQuery);
         
             // sanitize
-            $this->name=htmlspecialchars(strip_tags($this->name));
-            $this->email=htmlspecialchars(strip_tags($this->email));
-            $this->age=htmlspecialchars(strip_tags($this->age));
-            $this->designation=htmlspecialchars(strip_tags($this->designation));
-            $this->created=htmlspecialchars(strip_tags($this->created));
+            $this->id_sonde=htmlspecialchars(strip_tags($this->id_sonde));
+            $this->id_emplacement=htmlspecialchars(strip_tags($this->id_emplacement));
+
         
             // bind data
-            $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":age", $this->age);
-            $stmt->bindParam(":designation", $this->designation);
-            $stmt->bindParam(":created", $this->created);
+            $stmt->bindParam(":id_sonde", $this->id_sonde);
+            $stmt->bindParam(":id_emplacement", $this->id_emplacement);
+
         
             if($stmt->execute()){
                return true;
@@ -59,64 +47,50 @@
         }
 
         // READ single
-        public function getSingleEmployee(){
+        public function getSingleSensor(){
             $sqlQuery = "SELECT
-                        id, 
-                        name, 
-                        email, 
-                        age, 
-                        designation, 
-                        created
+                        id_sonde,  
+                        id_emplacement, 
+                     
                       FROM
                         ". $this->db_table ."
                     WHERE 
-                       id = ?
+                       id_sonde = ?
                     LIMIT 0,1";
 
             $stmt = $this->conn->prepare($sqlQuery);
 
-            $stmt->bindParam(1, $this->id);
+            $stmt->bindParam(1, $this->id_sonde);
 
             $stmt->execute();
 
             $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $this->name = $dataRow['name'];
-            $this->email = $dataRow['email'];
-            $this->age = $dataRow['age'];
-            $this->designation = $dataRow['designation'];
-            $this->created = $dataRow['created'];
+            $this->id_sonde = $dataRow['id_sonde'];
+            $this->id_emplacement = $dataRow['id_emplacement'];
         }        
 
         // UPDATE
-        public function updateEmployee(){
+        public function updateSensor(){
             $sqlQuery = "UPDATE
                         ". $this->db_table ."
                     SET
-                        name = :name, 
-                        email = :email, 
-                        age = :age, 
-                        designation = :designation, 
-                        created = :created
+                        id_sonde = :id_sonde, 
+                        id_emplacement = :id_emplacement, 
+
                     WHERE 
-                        id = :id";
+                        id_sonde = :id_sonde";
         
             $stmt = $this->conn->prepare($sqlQuery);
         
-            $this->name=htmlspecialchars(strip_tags($this->name));
-            $this->email=htmlspecialchars(strip_tags($this->email));
-            $this->age=htmlspecialchars(strip_tags($this->age));
-            $this->designation=htmlspecialchars(strip_tags($this->designation));
-            $this->created=htmlspecialchars(strip_tags($this->created));
-            $this->id=htmlspecialchars(strip_tags($this->id));
+            $this->id_sonde=htmlspecialchars(strip_tags($this->id_sonde));
+            $this->id_emplacement=htmlspecialchars(strip_tags($this->id_emplacement));
+ 
         
             // bind data
-            $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":age", $this->age);
-            $stmt->bindParam(":designation", $this->designation);
-            $stmt->bindParam(":created", $this->created);
-            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":id_sonde", $this->id_sonde);
+            $stmt->bindParam(":id_emplacement", $this->id_emplacement);
+
         
             if($stmt->execute()){
                return true;
@@ -125,19 +99,13 @@
         }
 
         // DELETE
-        function deleteEmployee(){
-            $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";
+        function deleteSensor(){
+            $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id_sonde = ?";
             $stmt = $this->conn->prepare($sqlQuery);
         
-            $this->id=htmlspecialchars(strip_tags($this->id));
+            $this->id_sonde=htmlspecialchars(strip_tags($this->id_sonde));
         
-            $stmt->bindParam(1, $this->id);
+            $stmt->bindParam(1, $this->id_sonde);
         
             if($stmt->execute()){
                 return true;
-            }
-            return false;
-        }
-
-    }
-?>

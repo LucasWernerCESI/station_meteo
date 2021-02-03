@@ -1,4 +1,5 @@
 <?php
+
     // headers requis
     header("Acces-Control-Allow-Origin : *"); // Autorise ou non l'accès à l'API en fonction de l'origine de l'utilisateur
     header("Content-type: application/json; charset=UTF-8"); // les données sont retranscrites en langage json contenu de la réponse réponds 
