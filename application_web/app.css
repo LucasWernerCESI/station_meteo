@@ -1,24 +1,6 @@
-.clear {
-    background-image: url(https://www.lejournaltoulousain.fr/wp-content/uploads/2019/10/M%C3%A9t%C3%A9o-beau-temps.jpg);
-}
-
-.clouds {
-    background-image: url(https://medias.pourlascience.fr/api/v1/images/view/5a82ac988fe56f032c4800f9/wide_1300/image.jpg);
-}
-
-.rain {
-    background-image: url(https://www.cieau.com/wp-content/uploads/2018/06/pluie.jpg);
-}
-
-.snow {
-    background-image: url(https://cdn.futura-sciences.com/buildsv6/images/wide1920/c/5/d/c5d390f48e_116523_neige-montagne.jpg);
-}
-
-.mist {
-    background-image: url(https://cdn.images.express.co.uk/img/dynamic/153/590x/secondary/UK-weather-1362975.jpg?r=1534891019826);
-}
 
 body {
+    background-image: url(https://www.lejournaltoulousain.fr/wp-content/uploads/2019/10/M%C3%A9t%C3%A9o-beau-temps.jpg);
     font-family: 'Trebuchet MS';
     text-align: center;
     color: #fff;
@@ -35,11 +17,6 @@ body {
 
 h1 {
     font-size: 3em;
-}
-
-i.wi {
-    font-size: 5em;
-    line-height: 3em;
 }
 
 h2 {
