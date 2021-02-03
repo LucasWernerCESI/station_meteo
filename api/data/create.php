@@ -8,8 +8,7 @@
     include_once '../config/database.php';
     include_once '../class/Data.php';
 
-    $database = new Database();
-    $db = $database->getConnection();
+    $db = Database::getConnection();
 
     $data = new Data($db);
 

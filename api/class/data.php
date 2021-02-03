@@ -1,15 +1,14 @@
 <?php 
 
-class Data
-{ 
+class Data { 
 
     // Connection 
     private $connection; 
 
     // Tables 
-    private $db_table_data = "donnees_meteo";
-    private $db_table_sensors = "sondes";
-    private $db_table_places = "emplacements";
+    const db_table_data = "donnees_meteo";
+    const db_table_sensors = "sondes";
+    const db_table_places = "emplacements";
 
     // Columns 
     public $nom_emplacement; 
@@ -25,16 +24,18 @@ class Data
     } 
 
 
-    // GET ALL 
-    public function getData()
+    // GET data w/ param 
+    public static function getData($db)
     {
         $sqlQuery = "
-        SELECT nom_emplacement, date_heure, temperature, humidite FROM " . $this->db_table_data . " 
-            JOIN " . $this->db_table_sensors . " 
-                ON " . $this->db_table_data . ".id_sonde = " . $this->db_table_sensors . ".id_sonde
-            JOIN " . $this->db_table_places . "
-                ON " . $this->db_table_sensors . ".id_emplacement = " . $this->db_table_places . ".id_emplacement";
-        $stmt = $this->connection->prepare($sqlQuery);
+        SELECT " . self::db_table_sensors . ".id_sonde, nom_emplacement, date_heure, temperature, humidite FROM " . self::db_table_data . " 
+            JOIN " . self::db_table_sensors . " 
+                ON " . self::db_table_data . ".id_sonde = " . self::db_table_sensors . ".id_sonde
+            JOIN " . self::db_table_places . "
+                ON " . self::db_table_sensors . ".id_emplacement = " . self::db_table_places . ".id_emplacement";
+
+        $stmt = $db->prepare($sqlQuery);
+        
         $stmt->execute(); 
         return $stmt;
     } 
@@ -69,20 +70,30 @@ class Data
         return false;
     }
 
-    // READ single 
-    public function getSingleData()
+    // READ sensor's last data 
+    public static function getLastData($db, $id_sonde)
     { 
-        $sqlQuery = "SELECT id_releve_meteo, date_heure, temperature, humidite, id_sonde FROM ". $this->db_table ." WHERE id = ? LIMIT 0,1"; 
-        $stmt = $this->connection->prepare($sqlQuery); 
-        $stmt->bindParam(1, $this->id); 
+        $sqlQuery = "SELECT date_heure, temperature, humidite, id_sonde FROM ". self::db_table_data ." WHERE id_sonde = :id_sonde ORDER BY date_heure DESC LIMIT 0,1"; 
+        $stmt = $db->prepare($sqlQuery); 
+        $stmt->bindParam(":id_sonde", $id_sonde);
         $stmt->execute();
-        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-         $this->id_releve_meteo = $dataRow['id_releve_meteo']; 
-         $this->date_heure = $dataRow['date_heure']; 
-         $this->temperature = $dataRow['temperature']; 
-         $this->humidite = $dataRow['humidite']; 
-         $this->id_sonde = $dataRow['id_sonde']; 
+
+        return $stmt; 
     } 
+
+    // READ all sensors' last data
+    public static function getAllLastData($db){
+        $sqlQuery = "SELECT id_sonde FROM ". self::db_table_sensors; 
+        $stmt = $db->prepare($sqlQuery); 
+        $stmt->execute();
+
+        $stmt_data = [];
+        foreach($stmt as $id_sonde){
+            $stmt_data[] = self::getLastData($db, $id_sonde);
+        }
+
+        return $stmt_data;
+    }
 }
                 
 ?>

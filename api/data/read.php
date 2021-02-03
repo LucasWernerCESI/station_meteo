@@ -5,12 +5,9 @@
     include_once '../config/database.php';
     include_once '../class/data.php';
 
-    $database = new Database();
-    $db = $database->getConnection();
+    $db = Database::getConnection();
 
-    $data = new Data($db);
-
-    $stmt = $datas->getData();
+    $stmt = Data::getData($db);
     $dataCount = $stmt->rowCount();
 
     echo json_encode($dataCount);
