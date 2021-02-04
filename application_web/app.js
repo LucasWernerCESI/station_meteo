@@ -3,10 +3,10 @@ var callBackGetSuccess = function(data){
     console.log("données api", data)
     
     var temp = document.getElementById("temperature");
-    temp.innerHTML = "La température est de " + data.body[0].temperature;
+    temp.innerHTML = "La température est de " + data.body[0].temperature + "°c";
 
     var humi = document.getElementById("humidite");
-    humi.innerHTML = "Le taux d'humidité est de : " + data.body[0].humidite;
+    humi.innerHTML = "Le taux d'humidité est de " + data.body[0].humidite + "%";
 
     //var sond = document.getElementById("sonde");
     //sond.innerHTML = "L'id de la sonde  est : " + data.body[0].id_sonde;
