@@ -1,6 +1,20 @@
 
 body {
-    background-image: url(https://www.lejournaltoulousain.fr/wp-content/uploads/2019/10/M%C3%A9t%C3%A9o-beau-temps.jpg);
+
+    font-family: 'Trebuchet MS';
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    height: 100vh;
+    overflow: hidden;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+
+}
+
+/*h1 {
     font-family: 'Trebuchet MS';
     text-align: center;
     color: #fff;
@@ -10,34 +24,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-position: center;
     background-size: cover;
+}*/
+
+#tab {
+    font-size: 20px;
+    text-align: center;
 
 }
 
-h1 {
-    font-size: 3em;
+#button {
+    font-size: 20px;
+    text-align: center;
+    float: center;
 }
 
-h2 {
-    font-size: 2em;
+#D5_On, #D5_Off, #D6_On, #D6_Off, #D7_On, #D7_Off, #D8_On, #D8_Off {
+    border-radius: 8px;
+    margin-top: 2px;
 }
 
-.tooltip {
-    opacity: 0;
+#row {
     position: absolute;
-    top: 0px;
-    left: 10px;
-    color: #fff;
-    background-color: #222;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 12px;
-    transition: opacity 1s, top 2s;
-    
+    bottom: 0px;
+    width: 100%;
+}
+#chartTemp, #chartPA, #barTemp{
+    width: 100%;
+    height: 300px;
 }
 
-h1:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+#gaugePA {
+    width: 100%;
+    height: 300px;
+    margin-left: 25%;
 }
