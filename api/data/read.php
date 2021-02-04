@@ -10,8 +10,6 @@
     $stmt = Data::getData($db);
     $dataCount = $stmt->rowCount();
 
-    echo json_encode($dataCount);
-
     if($dataCount > 0){
         
         $dataArr = array();
@@ -36,8 +34,6 @@
 
     else{
         http_response_code(404);
-        echo json_encode(
-            array("message" => "No record found.")
-        );
+        echo json_encode(array("message" => "No record found."));
     }
 ?>

@@ -12,14 +12,22 @@
 
     $data = new Data($db);
 
-    $sensorData = json_decode(file_get_contents("php://input"));
+    $sensorData = json_decode(file_get_contents("../../acquisition_donnees/capteur.json"), true);
 
-    $data->date_heure = $sensorData->date_heure;
-    $data->temperature = $sensorData->temperature;
-    $data->humidite = $sensorData->humidite;
-    $data->id_sonde = $sensorData->id_sonde;
+    //GET sensor ID
+    $sensorKeyArr = [];
+
+    foreach($sensorData['StatusSNS'] as $key => $value){
+        $sensorKeyArr[] = $key;
+    }
+
+    $idSonde = $sensorKeyArr[1];
+
+    $data->temperature = $sensorData['StatusSNS'][$idSonde]["Temperature"];
+    $data->humidite = $sensorData['StatusSNS'][$idSonde]["Humidity"];
+    $data->id_sonde = $idSonde;
     
-    if($item->createData()){
+    if($data->createData()){
         echo 'Data created successfully.';
     } else{
         echo 'Data could not be created.';

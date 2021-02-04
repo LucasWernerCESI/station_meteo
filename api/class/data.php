@@ -23,14 +23,14 @@ class Data {
         $this->connection = $db;
     } 
 
-
     /**
      * GET data w/ param 
      * @param object $db (PDO)
+     * @param string $id_sonde
      * @param array $timePeriod (start date_time, end date_time)
      * @return object $stmt (SQL statement)
      */
-    public static function getData($db, $timePeriod = [])
+    public static function getData($db, $id_sonde = '', $timePeriod = [])
     {
         $sqlQuery = "
         SELECT " . self::DB_TABLE_SENSORS . ".id_sonde, nom_emplacement, date_heure, temperature, humidite FROM " . self::DB_TABLE_DATA . " 
@@ -49,7 +49,7 @@ class Data {
     public function createData()
     { 
         $sqlQuery = "
-        INSERT INTO " . $this->db_table . " 
+        INSERT INTO " . self::DB_TABLE_DATA . " 
             SET date_heure = :date_heure, 
                 temperature = :temperature, 
                 humidite = :humidite, 
@@ -88,11 +88,12 @@ class Data {
 
     // READ all sensors' last data
     public static function getAllLastData($db){
-        $sqlQuery = "SELECT id_sonde FROM ". self::db_table_sensors; 
+        $sqlQuery = "SELECT id_sonde FROM ". self::DB_TABLE_SENSORS; 
         $stmt = $db->prepare($sqlQuery); 
         $stmt->execute();
 
         $stmt_data = [];
+
         foreach($stmt as $id_sonde){
             $stmt_data[] = self::getLastData($db, $id_sonde);
         }

@@ -1,16 +1,15 @@
 <?php
-// Headers requis
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// On vérifie que la méthode utilisée est correcte
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
-    // On inclut les fichiers de configuration et d'accès aux données
-    include_once '../config/Database.php';
-    include_once '../models/sensor.php';
+
+    include_once '../config/database.php';
+    include_once '../class/sensor.php';
 
     // On instancie la base de données
     $database = new Database();
@@ -20,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $sensor = new Sensor($db);
 
     // On récupère les données
-    $stmt = $sensor->getSensors();
+    $stmt = $sensor->getSensor();
 
     // On vérifie si on a au moins 1 sensor
     if($stmt->rowCount() > 0){
