@@ -5,15 +5,11 @@
     include_once '../config/database.php';
     include_once '../class/data.php';
 
-    $database = new Database();
-    $db = $database->getConnection();
+    $db = Database::getConnection();
 
-    $data = new Data($db);
-
-    $stmt = $datas->getData();
+    $stmt = Data::getData($db);
     $dataCount = $stmt->rowCount();
 
-    echo json_encode($dataCount);
 
     if($dataCount > 0){
         
@@ -40,7 +36,7 @@
     else{
         http_response_code(404);
         echo json_encode(
-            array("message" => "No record found.")
+            array("message" => "200 But No record found.")
         );
     }
 ?>

@@ -1,43 +1,55 @@
 
 body {
-    background-image: url(https://www.lejournaltoulousain.fr/wp-content/uploads/2019/10/M%C3%A9t%C3%A9o-beau-temps.jpg);
+
     font-family: 'Trebuchet MS';
     text-align: center;
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     height: 100vh;
     overflow: hidden;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
-    background-position: center;
     background-size: cover;
 
 }
 
-h1 {
-    font-size: 3em;
+#tab {
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 60px;
+
+}
+
+#button {
+    margin: auto;
+    font-size: 20px;
+    text-align: center;
+    float: center;
+}
+
+#D5_On, #D5_Off, #D6_On, #D6_Off, #D7_On, #D7_Off, #D8_On, #D8_Off {
+    border-radius: 8px;
+    margin-top: 2px;
+}
+
+#row {
+    position: absolute;
+    bottom: 1px;
+    width: 100%;
+}
+
+#tab_graphs {
+    
+    margin: auto;
+    float: center;
+    
+    
+}
+#table_mesures {
+    padding-bottom: 100px;
 }
 
 h2 {
-    font-size: 2em;
-}
-
-.tooltip {
-    opacity: 0;
-    position: absolute;
-    top: 0px;
-    left: 10px;
-    color: #fff;
-    background-color: #222;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 12px;
-    transition: opacity 1s, top 2s;
-    
-}
-
-h1:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+    padding-bottom: 70px;
 }
