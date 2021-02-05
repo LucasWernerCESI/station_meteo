@@ -10,7 +10,10 @@
     $stmt = Data::getData($db);
     $dataCount = $stmt->rowCount();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Yann
     if($dataCount > 0){
         
         $dataArr = array();
