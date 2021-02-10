@@ -32,6 +32,7 @@
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.setOnLoadCallback(drawAxisTickColors);
 
+    // Function de Graphique et affichage
     function drawAxisTickColors() {
           var data = google.visualization.arrayToDataTable([
             ['emplacement', 'Température', 'Humidité'],
