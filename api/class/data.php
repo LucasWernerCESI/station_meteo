@@ -37,7 +37,8 @@ class Data {
             JOIN " . self::DB_TABLE_SENSORS . " 
                 ON " . self::DB_TABLE_DATA . ".id_sonde = " . self::DB_TABLE_SENSORS . ".id_sonde
             JOIN " . self::DB_TABLE_PLACES . "
-                ON " . self::DB_TABLE_SENSORS . ".id_emplacement = " . self::DB_TABLE_PLACES . ".id_emplacement";
+                ON " . self::DB_TABLE_SENSORS . ".id_emplacement = " . self::DB_TABLE_PLACES . ".id_emplacement
+            WHERE date_heure BETWEEN " . $timePeriod[0] . " AND " . $timePeriod[1];
 
         $stmt = $db->prepare($sqlQuery);
         
@@ -50,21 +51,18 @@ class Data {
     { 
         $sqlQuery = "
         INSERT INTO " . self::DB_TABLE_DATA . " 
-            SET date_heure = :date_heure, 
-                temperature = :temperature, 
+            SET temperature = :temperature, 
                 humidite = :humidite, 
                 id_sonde = :id_sonde";
                 
         $stmt = $this->connection->prepare($sqlQuery); 
     
         // sanitize 
-        $this->date_heure = htmlspecialchars(strip_tags($this->date_heure)); 
         $this->temperature = htmlspecialchars(strip_tags($this->temperature)); 
         $this->humidite = htmlspecialchars(strip_tags($this->humidite)); 
         $this->id_sonde = htmlspecialchars(strip_tags($this->id_sonde)); 
         
         // bind data 
-        $stmt->bindParam(":date_heure", $this->date_heure); 
         $stmt->bindParam(":temperature", $this->temperature); 
         $stmt->bindParam(":humidite", $this->humidite); 
         $stmt->bindParam(":id_sonde", $this->id_sonde);

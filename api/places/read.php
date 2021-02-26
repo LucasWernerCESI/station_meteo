@@ -23,7 +23,7 @@
             
         $placesArr = array();
         $placesArr["body"] = array();
-        $placesArr["itemCount"] = $placeCount;
+        $placesArr["placeCount"] = $placeCount;
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);

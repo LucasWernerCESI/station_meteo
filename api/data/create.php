@@ -6,7 +6,7 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../config/database.php';
-    include_once '../class/Data.php';
+    include_once '../class/data.php';
 
     $db = Database::getConnection();
 
@@ -27,6 +27,10 @@
     $data->humidite = $sensorData['StatusSNS'][$idSonde]["Humidity"];
     $data->id_sonde = $idSonde;
     
+    var_dump($data->temperature);
+    var_dump($data->humidite);
+    var_dump($data->id_sonde);
+
     if($data->createData()){
         echo 'Data created successfully.';
     } else{
