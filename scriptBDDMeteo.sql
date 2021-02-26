@@ -10,7 +10,7 @@ CREATE TABLE emplacements(
 );
 
 CREATE TABLE sondes(
-   id_sonde INT NOT NULL,
+   id_sonde VARCHAR(5) NOT NULL,
    id_emplacement INT NOT NULL,
    CONSTRAINT pk_id_sonde PRIMARY KEY(id_sonde),
    CONSTRAINT fk_id_emplacement FOREIGN KEY(id_emplacement) REFERENCES emplacements(id_emplacement)
@@ -21,7 +21,7 @@ CREATE TABLE donnees_meteo(
    date_heure TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    temperature DECIMAL(6,2) DEFAULT NULL,
    humidite DECIMAL(6,2) DEFAULT NULL,
-   id_sonde INT NOT NULL,
+   id_sonde VARCHAR(5) NOT NULL,
    CONSTRAINT pk_id_releve_meteo PRIMARY KEY(id_releve_meteo),
    CONSTRAINT fk_id_sonde FOREIGN KEY(id_sonde) REFERENCES sonde(id_sonde)
 );
