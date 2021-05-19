@@ -1,0 +1,17 @@
+{
+    "name": "lucaswerner/api",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Lucas",
+            "email": "lucas.werner@viacesi.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+        "psr-4": {
+            "Classes\\": "class/"
+        }
+    }
+}

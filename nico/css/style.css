@@ -1,0 +1,71 @@
+body{
+	margin:0;
+	padding:0;
+	color:#CCC;
+	text-align:center;
+	background-image:url("../Images/Meteo.jpg");
+	background-size: cover;
+	/*background-color:#2fa4e7;*/
+}
+*{
+	font:12pt arial;
+	
+}
+header{
+	text-align:left;
+	padding:20px;
+	background-color: #2f32e7;
+	color: #AAA;
+	font:36pt arial;
+	border-bottom:solid 1px rgb(97, 97, 97);
+}
+form{
+	padding:20px;
+	padding-top:50px;
+	margin:auto;
+	text-align:left;
+	width:500px;
+}
+input{
+	background:none;
+	padding:10px;
+	font:12pt arial;
+	color:rgb(97, 97, 97);
+	background-color:rgb(238, 202, 0);
+	border:solid 1px rgb(238, 202, 0);
+	outline:none;
+	width:400px;
+	margin-top:6px;
+	margin-bottom:16px;
+	display:block;
+}
+input[type="submit"]{
+	background-color:rgb(238, 202, 0);
+	border-color:rgb(238, 202, 0);
+	color:#FFF;
+	
+}
+input:hover{
+	background-color: #F80;
+}
+#message{
+	text-align:left;
+	padding:20px;
+	background-color:#800;
+	border-top:dashed 1px #AAA;
+	border-bottom:dashed 1px #AAA;
+}
+a{
+	padding:14px;
+	background-color:rgb(238, 202, 0);
+	text-decoration:none;
+	color:#FFF;
+	vertical-align:middle;
+	margin-left:60px;
+	border-radius:6px;
+	float:right;
+}
+a:hover{
+	background-color:#F80;
+}
+
